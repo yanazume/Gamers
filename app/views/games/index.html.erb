@@ -1,0 +1,10 @@
+<% @game.each do |game| %>
+<div>
+    <%= link_to game_path(game.id) do %>
+    <% end %>
+
+   <p>ゲームタイトル：<%= game.title %></p>
+   <p>感想：<%= game.body %></p>
+   <p>ユーザーネーム : <%= game.user.name %></p>
+</div>
+<% end %>
