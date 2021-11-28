@@ -1,0 +1,48 @@
+<% if @model == "user" %>
+  <% if @users.present? %>
+    <table class="table table-sm user-index">
+      <h2>Users search for " <%= params[:search] %> "</h2>
+      <thead>
+        <th>name</th>
+        <th></th>
+      </thead>
+      <tbody>
+        <% @users.each do |user| %>
+        <tr>
+          <td><%= user.name %></td>
+          <td><%= link_to "Show", "/users/#{user.id}" %></td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <h2>Users search for " <%= params[:search] %> "</h2>
+      ・該当のユーザーはいません
+    <% end %>
+<% elsif @model == "game" %>
+  <% if @games.present? %>
+    <table class="table game-index">
+      <h2>Games search for " <%= params[:search] %> "</h2>
+      <thead>
+        <th></th>
+        <th>タイトル</th>
+        <th>感想</th>
+      </thead>
+      <tbody>
+        <% @games.each do |game| %>
+          <tr>
+            <td>
+              <%= link_to user_path(game.user) do %>
+              <% end %>
+            </td>
+            <td><%= link_to game.title, game_path(game.id) %></td>
+            <td><%= game.body %></td>
+           </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+  <h2>Games search for " <%= params[:search] %> "</h2>
+    ・該当のゲームはありません
+  <% end %>
+<% end %>

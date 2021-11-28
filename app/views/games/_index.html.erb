@@ -1,0 +1,23 @@
+<table>
+    <thead>
+        <tr>
+            <th>ユーザーネーム</th>
+            <th>タイトル</th>
+            <th>感想</th>
+            <th></th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody id="game">
+    <% games.each do |game| %>
+      <tr>
+        <td><%= game.user.name %></td>
+        <td><%= game.title %></td>
+        <td><%= game.body %></td>
+          <td></td>
+        <% end %>
+      </tr>
+    <% end %>
+    </tbody>
+</table>

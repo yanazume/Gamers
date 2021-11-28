@@ -1,8 +1,18 @@
 Rails.application.routes.draw do
-  devise_for :users
+ get '/search', to: 'searchs#search'
+  devise_for :users, controllers: {
+    sessions: 'devise/sessions',
+    registrations: 'devise/registrations'
+  }
+
   root to: 'homes#top'
-  resources :games, only: [:new, :create, :index, :show, :destroy]
+  resources :games do
+  resources :post_comments, only: [:create, :destroy]
+  resource :favorites, only: [:create, :destroy]
+  end
 
-   resources :users, only: [:show]
+   resources :users do
+ end
+
+
 end
-

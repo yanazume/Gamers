@@ -1,6 +1,43 @@
+
 <div>
   <p>ゲームタイトル：<%= @game.title %></p>
-  <p>感想：<%= @post_image.body %></p>
-  <p>ユーザーネーム：<%= @post_image.user.name %></p>
+  <p>感想：<%= @game.body %></p>
+  <p>ユーザーネーム：<%= @game.user.name %></p>
   <p>投稿日時：<%= @game.created_at.strftime('%Y/%m/%d') %></p>
+   <% if @game.user_id == current_user.id %>
+   <%= link_to "削除", game_path(@game), method: :delete %>
+  <% end %>
+
+   <% if @game.favorited_by?(current_user) %>
+    <p>
+      <%= link_to game_favorites_path(@game), method: :delete do %>
+        ♥<%= @game.favorites.count %> いいね
+      <% end %>
+    </p>
+    <% else %>
+    <p>
+      <%= link_to game_favorites_path(@game), method: :post do %>
+        ♡<%= @game.favorites.count %> いいね
+      <% end %>
+    </p>
+  <% end %>
+</div>
+
+<div>
+<p>コメント件数：<%= @game.post_comments.count %></p>
+<% @game.post_comments.each do |post_comment| %>
+  <%= post_comment.user.name %>
+  <%= post_comment.created_at.strftime('%Y/%m/%d') %><%= post_comment.comment %>
+  <% if post_comment.user == current_user %>
+  <div>
+    <%= link_to "削除", game_post_comment_path(post_comment.game, post_comment), method: :delete %>
+  </div>
+  <% end %>
+<% end %>
+</div>
+<div>
+<%= form_with(model:[@game, @post_comment], local: true) do |f| %>
+  <%= f.text_area :comment, rows:'5',placeholder: "コメントをここに" %>
+  <%= f.submit "送信する" %>
+<% end %>
 </div>

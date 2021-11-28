@@ -1,0 +1,25 @@
+<table class="table table-user">
+
+  <h2>User</h2>
+  <thead>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Name</th>
+      <th><%= user.name %></th>
+    </tr>
+
+   <div class='row'>
+
+
+   <%= link_to edit_user_path(user.id) do %>
+   <div class= " edit btn btn-outline-secondary btn-default btn-block" > <span class="fas fa-user-cog" aria-hidden="true"></span></div>
+
+
+   <% end %>
+
+   </div>
+
+
+  </tbody>
+</table>
